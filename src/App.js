@@ -1,15 +1,14 @@
- 
 import './App.css';
 import { useEffect, useState } from 'react';
 import SingleCard from './components/SingleCard';
 
 const cardImag = [
-  {"src": "https://via.placeholder.com/150/FF5733/FFFFFF?text=Image+1","match": false},
-  {"src": "https://via.placeholder.com/150/3498db/FFFFFF?text=Image+2","match": false},
-  {"src": "https://via.placeholder.com/150/e74c3c/FFFFFF?text=Image+3","match": false},
-  {"src": "https://via.placeholder.com/150/2ecc71/FFFFFF?text=Image+4","match": false},
-  {"src": "https://via.placeholder.com/150/9b59b6/FFFFFF?text=Image+5","match": false},
-  {"src": "https://via.placeholder.com/150/f1c40f/FFFFFF?text=Image+6","match": false}
+  { "src": "/img/helmet-1.png", matched: false},
+  { "src": "/img/potion-1.png", matched: false},
+  { "src": "/img/ring-1.png", matched: false},
+  { "src": "/img/scroll-1.png", matched: false},
+  { "src": "/img/shield-1.png", matched: false},
+  { "src": "/img/sword-1.png", matched: false}
 ]
 
 function App() {
@@ -67,11 +66,19 @@ function App() {
   }
   , []) 
   return (
-    <div className="App">
-      <h1>Memory Game</h1>
-      <button onClick={shuffleCard} >New Game</button>
+    <div className="text-center bg-fuchsia-950 bg-gradient-to-r from-fuchsia-950 via-purple-700 to-pink-900"> 
 
-      <div className="card-grid">
+      <div class="relative text-center text-white">
+        <div class="bg-hero-pattern h-14 w-full bg-cover "></div>
+        <p class="font-bold absolute text-4xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">MEMORY GAMES</p>
+      </div> 
+
+      <button type='button' 
+        onClick={shuffleCard}
+        className='px-4 py-2 my-3 font-bold text-white bg-purple-600 rounded hover:bg-purple-700'
+      >New Game</button>
+
+      <div className="grid place-items-center gap-5 my-7 px-32 lg:grid-cols-4  sm:grid-cols-3">
         {
           cards.map((card) => (
             <SingleCard 
@@ -85,7 +92,7 @@ function App() {
         }
       </div>
        
-       <p> Turns: {turns}</p>
+      <p className='px-4 py-2 font-bold text-2xl text-white bg-purple-600 rounded hover:bg-purple-700'> Turns: {turns}</p>
     </div>
   );
 }
