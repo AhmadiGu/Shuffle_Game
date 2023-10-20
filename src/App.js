@@ -34,6 +34,26 @@ function App() {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
   
+  const checkMatch = () => { 
+    if(cards.every((card) => card.matched)){
+      return true
+    }
+    return null;
+  }
+  
+  let winMessage = null; 
+  if(checkMatch()){
+    winMessage = (
+    <div 
+    className='text-4xl font-bold text-white backdrop-blur-sm bg-white/30 absolute 
+    text-4xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 py-16
+    rounded-lg shadow-inner shadow-purple-900 text-center'>
+     You Win After {turns} Turns! <br/>
+     <span> Click New Game to Try New One</span>
+   </div>
+    );
+  }
+  
   useEffect(() => {
     if(choiceOne && choiceTwo){
       setDisabled(true)
@@ -41,7 +61,7 @@ function App() {
         setCards(prevCards => {
           return prevCards.map((card) => {
             if(card.src === choiceOne.src){
-              return {...card, match: true}
+              return {...card, matched: true}
             } else {
               return card
             }
@@ -52,6 +72,7 @@ function App() {
         setTimeout(() => resetTurn(), 1000) 
       }
     }
+    
   }, [choiceOne, choiceTwo])
  
   const resetTurn = () => { 
@@ -62,7 +83,7 @@ function App() {
   }
   
   useEffect(() => { 
-    shuffleCard()
+    shuffleCard() 
   }
   , []) 
   return (
@@ -85,14 +106,17 @@ function App() {
               key={card.id} 
               card={card} 
               handlechoice={handlechoice}
-              flipped ={card === choiceOne || card === choiceTwo || card.match}
+              flipped ={card === choiceOne || card === choiceTwo || card.matched}
               disabled ={disabled}
             />
           ))
         }
       </div>
-       
+     
       <p className='px-4 py-2 font-bold text-2xl text-white bg-purple-600 rounded hover:bg-purple-700'> Turns: {turns}</p>
+      {
+        winMessage 
+      }
     </div>
   );
 }
